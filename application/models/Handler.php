@@ -24,7 +24,7 @@ class Handler extends CI_Model{
         }
     }
 
-    public function select_where($table, $column, $condition, $single = TRUE, $count=FALSE)
+    public function select_where($table, $column, $condition, $count=FALSE, $single = TRUE)
     {
         $query = $this
                     ->db

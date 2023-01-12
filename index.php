@@ -1,7 +1,6 @@
 
 <?php
 include_once("configurations/config.php");
-include_once("configurations/arrays.php");
 date_default_timezone_set('Asia/Karachi');
 
 header('Access-Control-Allow-Origin: *');
