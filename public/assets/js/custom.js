@@ -1,11 +1,9 @@
 $(function (){
-
     $("#change-password").submit(function(e){
         let curr_pass = $("#current_password").val();
         let new_pass = $('#new_password').val();
         let cnew_pass = $("#cnew_password").val();
         let check = 'Pass';
-
         if(curr_pass == ''){
             show_error('Current Password Is Required');
             check = 'Fail';
@@ -33,21 +31,17 @@ $(function (){
                 }
             });
         }
-
         if(check == 'Fail'){
             e.preventDefault();
         }else{
             removeError();
         }
     });
-
 });
-
 function show_error(error_message){
     $('#error_message').removeClass('d-none');
     $("#error_message").text(error_message);
 }
-
 function removeError(){
     $('#error_message').addClass('d-none');
     $("#error_message").text("");

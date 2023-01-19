@@ -6,7 +6,6 @@ class Service extends CI_Controller
         parent::__construct();
         $this->load->model('handler');
     }
-
     public function checkPassword(){
         $current_password = $this->input->get("curr_pass");
         $user_id = $this->session->userdata("user_id");
@@ -21,8 +20,5 @@ class Service extends CI_Controller
         }else{
             echo json_encode("true");
         }
-
-
     }
-
 }

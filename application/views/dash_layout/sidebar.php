@@ -1,5 +1,4 @@
 <!-- Menu -->
-
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
     <div class="app-brand demo">
         <a href="<?= URL ?>" class="app-brand-link">
@@ -10,9 +9,7 @@
             <i class="ti ti-x d-block d-xl-none ti-sm align-middle"></i>
         </a>
     </div>
-
     <div class="menu-inner-shadow"></div>
-
     <ul class="menu-inner py-1">
         <!-- Page -->
         <li class="menu-item <?= ($main_content=='dashboard/index') ? 'active' : NULL; ?>">

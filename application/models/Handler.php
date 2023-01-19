@@ -1,15 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
 class Handler extends CI_Model{
-
-
     public function __construct()
     {
         parent::__construct();
     }
-
-
     public function select($table, $column = 'id', $order_by = 'DESC', $count=FALSE)
     {
         $query = $this
@@ -23,7 +18,6 @@ class Handler extends CI_Model{
             return $query->num_rows();
         }
     }
-
     public function select_where($table, $column, $condition, $count=FALSE, $single = TRUE)
     {
         $query = $this
@@ -39,8 +33,6 @@ class Handler extends CI_Model{
             return $query->num_rows();
         }
     }
-
-
     public function delete($table, $column = FALSE, $condition = FALSE){
         if(!$column){
             $this->db->delete($table);
@@ -51,9 +43,7 @@ class Handler extends CI_Model{
                 ->delete($table);
         }
     }
-
     public function truncate($table){
         $this->db->truncate($table);
     }
-
 }
