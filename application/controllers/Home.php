@@ -10,6 +10,20 @@ class Home extends CI_Controller {
 
     public function index()
 	{
-		$this->load->view('auth');
+        if($this->session->userdata('user_id')){
+            redirect(URL.'dashboard');
+        }else{
+            $data['title'] = 'Sign In';
+            $this->load->view('auth', $data);
+        }
+
 	}
+
+    public function dashboard()
+    {
+        $data['title'] = 'Dashboard';
+        $data['main_content'] = 'dashboard/index';
+
+        $this->load->view("dashboard",$data);
+    }
 }

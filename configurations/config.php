@@ -17,4 +17,4 @@ const AJAXURL = 'http://localhost/softpos/';
 
 const SITE_MODE = 'demo';   //live demo
 
-
+const CLIENT = 'Saad Medical Store';
