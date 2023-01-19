@@ -60,17 +60,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
  * ------------------------------------------------------
- *  Load the framework configurations
+ *  Load the framework config
  * ------------------------------------------------------
  */
-	if (file_exists(APPPATH.'config/'.ENVIRONMENT.'/configurations.php'))
+	if (file_exists(APPPATH.'config/'.ENVIRONMENT.'/config.php'))
 	{
-		require_once(APPPATH.'config/'.ENVIRONMENT.'/configurations.php');
+		require_once(APPPATH.'config/'.ENVIRONMENT.'/config.php');
 	}
 
-	if (file_exists(APPPATH.'config/configurations.php'))
+	if (file_exists(APPPATH.'config/config.php'))
 	{
-		require_once(APPPATH.'config/configurations.php');
+		require_once(APPPATH.'config/config.php');
 	}
 
 /*
@@ -234,7 +234,7 @@ if ( ! is_php('5.4'))
  * ------------------------------------------------------
  *
  * Configure mbstring and/or iconv if they are enabled
- * and set MB_ENABLED and ICONV_ENABLED configurations, so
+ * and set MB_ENABLED and ICONV_ENABLED config, so
  * that we don't repeatedly do extension_loaded() or
  * function_exists() calls.
  *
@@ -261,7 +261,7 @@ if ( ! is_php('5.4'))
 	}
 
 	// There's an ICONV_IMPL constant, but the PHP manual says that using
-	// iconv's predefined configurations is "strongly discouraged".
+	// iconv's predefined config is "strongly discouraged".
 	if (extension_loaded('iconv'))
 	{
 		define('ICONV_ENABLED', TRUE);

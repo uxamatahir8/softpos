@@ -130,7 +130,7 @@ if ( ! function_exists('standard_date'))
 	 *
 	 * Returns a date formatted according to the submitted standard.
 	 *
-	 * As of PHP 5.2, the DateTime extension provides configurations that
+	 * As of PHP 5.2, the DateTime extension provides config that
 	 * serve for the exact same purpose and are used with date().
 	 *
 	 * @todo	Remove in version 3.1+.
@@ -151,7 +151,7 @@ if ( ! function_exists('standard_date'))
 			$time = now();
 		}
 
-		// Procedural style pre-defined configurations from the DateTime extension
+		// Procedural style pre-defined config from the DateTime extension
 		if (strpos($fmt, 'DATE_') !== 0 OR defined($fmt) === FALSE)
 		{
 			return FALSE;

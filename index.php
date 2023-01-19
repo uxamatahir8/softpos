@@ -1,6 +1,6 @@
 
 <?php
-include_once("configurations/config.php");
+include_once("config/config.php");
 date_default_timezone_set('Asia/Karachi');
 
 header('Access-Control-Allow-Origin: *');
@@ -60,7 +60,7 @@ ini_set('memory_limit', '-1');
  * APPLICATION ENVIRONMENT
  *---------------------------------------------------------------
  *
- * You can load different configurations depending on your
+ * You can load different config depending on your
  * current environment. Setting the environment also influences
  * things like logging and error reporting.
  *
@@ -240,7 +240,7 @@ if ( ! is_dir($system_path))
 
 /*
  * -------------------------------------------------------------------
- *  Now that we know the path, set the main path configurations
+ *  Now that we know the path, set the main path config
  * -------------------------------------------------------------------
  */
 // The name of THIS file

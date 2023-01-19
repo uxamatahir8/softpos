@@ -559,7 +559,7 @@ class CI_Upload {
 
 		/*
 		 * Move the file to the final destination
-		 * To deal with different server configurations
+		 * To deal with different server config
 		 * we'll attempt to use copy() first. If that fails
 		 * we'll use move_uploaded_file(). One of the two should
 		 * reliably work in most environments

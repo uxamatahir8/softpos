@@ -393,7 +393,7 @@ class CI_Loader {
 		}
 
 		// Initialize the db variable. Needed to prevent
-		// reference errors with some configurations
+		// reference errors with some config
 		$CI->db = '';
 
 		// Load the DB class

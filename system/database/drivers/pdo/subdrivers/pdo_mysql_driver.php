@@ -174,7 +174,7 @@ class CI_DB_pdo_mysql_driver extends CI_DB_pdo_driver {
 			}
 
 			// DO NOT use array_merge() here!
-			// It re-indexes numeric keys and the PDO_MYSQL_ATTR_SSL_* configurations are integers.
+			// It re-indexes numeric keys and the PDO_MYSQL_ATTR_SSL_* config are integers.
 			empty($ssl) OR $this->options += $ssl;
 		}
 
