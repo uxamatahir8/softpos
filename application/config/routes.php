@@ -53,5 +53,5 @@ $route['default_controller'] = 'home';
 $route['dashboard'] = 'home/dashboard';
 $route['change-password'] = 'home/changePassword';
 $route['cash-register'] = 'home/cashRegister';
-$route['404_override'] = '';
+$route['404_override'] = 'home/dashboard';
 $route['translate_uri_dashes'] = FALSE;
