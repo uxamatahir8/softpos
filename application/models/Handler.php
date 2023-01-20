@@ -46,4 +46,13 @@ class Handler extends CI_Model{
     public function truncate($table){
         $this->db->truncate($table);
     }
+
+    public function getCell($table, $column, $condition, $cell_name){
+        $query = $this
+                    ->db
+                    ->where($column, $condition)
+                    ->get($table);
+
+        return $query->row()->$cell_name;
+    }
 }

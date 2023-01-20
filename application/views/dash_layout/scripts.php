@@ -11,5 +11,18 @@
 <!-- Vendors JS -->
 <!-- Main JS -->
 <script src="<?= ASSETS ?>assets/js/main.js"></script>
+<script src="<?= ASSETS ?>assets/js/ui-modals.js"></script>
 <script src="<?= ASSETS ?>assets/js/custom.js"></script>
 <!-- Page JS -->
+
+
+<?php
+$cash_in_hand = cash_in_hand();
+if($cash_in_hand == 0){ ?>
+    <script>
+        cash_pop_up();
+    </script>
+    <?php
+}
+?>
+

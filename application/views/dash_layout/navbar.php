@@ -11,13 +11,18 @@
                 <i class="ti ti-sm"></i>
             </a>
         </div>
-        <h4 class="fw-bold mt-3"><?= $title; ?></h4>
-        <div id="error_message" class="mx-5 mt-3 p-1 alert alert-danger mb-2 d-none"></div>
-        <?php
-        if($this->session->flashdata('message')){
-            ?>
-            <div class="alert alert-<?= $this->session->flashdata('message_type'); ?>">
+        <span class="fw-bold ms-3 badge bg-primary p-2"> Cash In Hand : <span id="current_cash"><?php echo cash_in_hand(); ?></span> PKR </span>
+        <button type="button"  id="modal_btn" class="btn btn-sm btn-primary p-2"  data-bs-toggle="modal" data-bs-target="#modalCenter" class="cursor-pointer btn btn-primary btn-sm p-0">
+            <i class="fa fa-plus"></i>
+        </button>
+        <div id="error_div" class="mx-5 mt-2 alert alert-danger alert-dismissible mb-2 d-none">
+            <span id="error_message"></span>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php  if($this->session->flashdata('message')){ ?>
+            <div class="mx-5 mt-3 alert alert-<?= $this->session->flashdata('message_type'); ?> alert-dismissible">
                 <span><?= $this->session->flashdata('message'); ?></span>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         <?php } ?>
         <ul class="navbar-nav flex-row align-items-center ms-auto">

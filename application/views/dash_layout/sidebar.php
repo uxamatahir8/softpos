@@ -18,6 +18,15 @@
                 <div data-i18n="Page 1">Dashboard</div>
             </a>
         </li>
+
+        <li class="menu-item <?= ($main_content=='dashboard/cash-register') ? 'active' : NULL; ?>">
+            <a href="<?= URL ?>cash-register" class="menu-link">
+                <i class="menu-icon tf-icons ti ti-currency-dollar"></i>
+                <div data-i18n="Page 1">Cash Register</div>
+            </a>
+        </li>
+
+
     </ul>
 </aside>
 <!-- / Menu -->

@@ -303,8 +303,9 @@
         $random_number = '';
         $count = 0;
         while ($count < $size) {
-            $random_digit = mt_rand(0, 9);
+            $random_digit = mt_rand(1, 9);
             $random_number .= $random_digit;
+
             $count++;
         }
         return $random_number;
@@ -1094,5 +1095,11 @@
         echo "</pre>";
     }
 
-
+    function cash_in_hand()
+    {
+        $CI = get_instance();
+        $CI->load->model('handler');
+        $cash = $CI->handler->getCell('users','id', $_SESSION['user_id'], 'cash_in_hand');
+        return $cash;
+    }
 

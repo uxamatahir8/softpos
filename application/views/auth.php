@@ -50,9 +50,12 @@
                             <img src="<?= ASSETS ?>assets/img/soft_logo.png" width="200">
                         </a>
                     </div>
-                    <?php
-                        if($this->session->flashdata('message')){
-                    ?>
+
+                    <div id="error_div" class="alert alert-danger alert-dismissible mb-2 d-none">
+                        <span id="error_message"></span>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <?php if($this->session->flashdata('message')){ ?>
                         <div class="alert alert-<?= $this->session->flashdata('message_type'); ?>">
                              <span><?= $this->session->flashdata('message'); ?></span>
                         </div>
@@ -66,6 +69,10 @@
                                 <input type="password" id="password" class="form-control" name="password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password"/>
                                 <span class="input-group-text cursor-pointer"><i class="ti ti-eye-off"></i></span>
                             </div>
+                        </div>
+                        <div class="mb-3">
+                            <label> What is <span id="first_number"> <?= random_number(1) ?> </span> plus <span id="second_number"> <?= random_number(2) ?> </span> ? </label>
+                            <input type="text" class="form-control" id="answer" name="answer" placeholder="Enter Your Answer" autofocus/>
                         </div>
                         <div class="mb-3">
                             <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
@@ -96,8 +103,9 @@
 <script src="<?= ASSETS ?>assets/vendor/libs/formvalidation/dist/js/plugins/Bootstrap5.min.js"></script>
 <script src="<?= ASSETS ?>assets/vendor/libs/formvalidation/dist/js/plugins/AutoFocus.min.js"></script>
 <!-- Main JS -->
+
 <script src="<?= ASSETS ?>assets/js/main.js"></script>
-<!-- Page JS -->
-<script src="<?= ASSETS ?>assets/js/pages-auth.js"></script>
+<script src="<?= ASSETS ?>assets/js/custom.js"></script>
+
 </body>
 </html>

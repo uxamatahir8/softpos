@@ -8,6 +8,13 @@ class Home extends CI_Controller {
         $this->load->model('handler');
     }
 
+    public function changePassword(){
+        $data['title'] = 'Change Password';
+        $data['main_content'] = 'dashboard/change-password';
+
+        $this->load->view("dashboard",$data);
+    }
+
     public function index()
 	{
         if($this->session->userdata('user_id')){
@@ -25,5 +32,14 @@ class Home extends CI_Controller {
         $data['main_content'] = 'dashboard/index';
 
         $this->load->view("dashboard",$data);
+    }
+
+    public function cashRegister(){
+        $data['title'] = 'Cash Register';
+        $data['main_content'] = 'dashboard/cash-register';
+
+        $data['cash_details'] = $this->handler->select('cash_register');
+
+        $this->load->view("dashboard", $data);
     }
 }

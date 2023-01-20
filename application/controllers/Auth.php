@@ -12,6 +12,9 @@ class Auth extends CI_Controller{
         if($user_check){
             $get_user_details = $this->handler->select_where('users','username',$username,false);
             if($get_user_details->password == md5($password)){
+                $this->session->set_flashdata('message_type','success');
+                $this->session->set_flashdata('message','Welcome '. $get_user_details->name. ', Logged In Successfully');
+
                 $this->session->set_userdata('user_id',$get_user_details->id);
                 $this->session->set_userdata('user_name',$get_user_details->name);
                 redirect(URL.'dashboard');
@@ -26,12 +29,7 @@ class Auth extends CI_Controller{
             redirect(URL);
         }
     }
-    public function changePassword(){
-        $data['title'] = 'Change Password';
-        $data['main_content'] = 'dashboard/change-password';
 
-        $this->load->view("dashboard",$data);
-    }
     public function updatePassword(){
         $new_password = md5($this->input->post('new_password'));
         $user_id = $this->session->userdata("user_id");
