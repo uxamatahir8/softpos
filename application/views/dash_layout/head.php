@@ -20,6 +20,9 @@
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="<?= ASSETS ?>assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
     <link rel="stylesheet" href="<?= ASSETS ?>assets/vendor/libs/node-waves/node-waves.css" />
+    <link rel="stylesheet" href="<?= ASSETS ?>assets/vendor/libs/sweetalert2/sweetalert2.css" />
+    <link rel="stylesheet" href="<?= ASSETS ?>assets/vendor/libs/typeahead-js/typeahead.css" />
+    <link rel="stylesheet" href="<?= ASSETS ?>assets/vendor/libs/animate-css/animate.css" />
     <!-- Page CSS -->
     <!-- Helpers -->
     <script src="<?= ASSETS ?>assets/vendor/js/helpers.js"></script>

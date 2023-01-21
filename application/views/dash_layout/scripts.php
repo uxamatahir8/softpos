@@ -9,6 +9,8 @@
 <script src="<?= ASSETS ?>assets/vendor/js/menu.js"></script>
 <!-- endbuild -->
 <!-- Vendors JS -->
+<script src="<?= ASSETS ?>assets/vendor/libs/sweetalert2/sweetalert2.js"></script>
+
 <!-- Main JS -->
 <script src="<?= ASSETS ?>assets/js/main.js"></script>
 <script src="<?= ASSETS ?>assets/js/ui-modals.js"></script>
@@ -18,7 +20,7 @@
 
 <?php
 $cash_in_hand = cash_in_hand();
-if($cash_in_hand == 0){ ?>
+if($cash_in_hand < 1){ ?>
     <script>
         cash_pop_up();
     </script>

@@ -10,6 +10,7 @@
                             <input type="password" id="current_password" name="current_password" class="form-control mb-2" placeholder="Current Password">
                             <input type="password" id="new_password" name="new_password" class="form-control mb-2" placeholder="New Password">
                             <input type="password" id="cnew_password" name="cnew_password" class="form-control mb-2" placeholder="Confirm New Password">
+                            <hr>
                             <button type="submit" class="btn btn-warning">
                                 Update Password
                             </button>

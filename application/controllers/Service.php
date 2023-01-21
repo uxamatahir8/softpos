@@ -16,7 +16,7 @@ class Service extends CI_Controller
 
         if($curr_pass != md5($current_password)){
             $message = 'Current Password Not Matched';
-            echo json_encode('Current Password Is Incorrect');
+            echo json_encode($message);
         }else{
             echo json_encode("true");
         }
@@ -28,7 +28,8 @@ class Service extends CI_Controller
         $new_cash = $current_cash + $added_cash;
         $data_add = array(
             'previous_cash' => $current_cash,
-            'cash_added' => $added_cash,
+            'type'=> 'Cash In',
+            'cash' => $added_cash,
             'cash_by' => 'Self',
         );
         $insert = $this->db->insert('cash_register', $data_add);
@@ -45,6 +46,27 @@ class Service extends CI_Controller
                 $this->session->set_flashdata('message', 'Cash of ' . $added_cash . ' PKR Added Successfully');
                 echo json_encode('true');
             }
+        }
+    }
+    public function delExpenseType(){
+        $expense_id = $this->input->post('id');
+        $id = str_decode($expense_id);
+
+
+        $result = $this->handler->delete('expense_types', 'id', $id);
+        if($result){
+            echo json_encode('true');            
+        }
+    }
+
+    public function delCategory(){
+        $cat_id = $this->input->post('id');
+        $id = str_decode($cat_id);
+
+
+        $result = $this->handler->delete('categories', 'id', $id);
+        if($result){
+            echo json_encode('true');
         }
     }
 }

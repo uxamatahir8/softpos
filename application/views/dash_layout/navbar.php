@@ -12,7 +12,7 @@
             </a>
         </div>
         <span class="fw-bold ms-3 badge bg-primary p-2"> Cash In Hand : <span id="current_cash"><?php echo cash_in_hand(); ?></span> PKR </span>
-        <button type="button"  id="modal_btn" class="btn btn-sm btn-primary p-2"  data-bs-toggle="modal" data-bs-target="#modalCenter" class="cursor-pointer btn btn-primary btn-sm p-0">
+        <button type="button"  id="modal_btn" class="btn btn-sm btn-primary p-2"  data-bs-toggle="modal" data-bs-target="#cashModal" class="cursor-pointer btn btn-primary btn-sm p-0">
             <i class="fa fa-plus"></i>
         </button>
         <div id="error_div" class="mx-5 mt-2 alert alert-danger alert-dismissible mb-2 d-none">
