@@ -6,21 +6,21 @@ class Home extends CI_Controller {
         parent::__construct();
         $this->load->model('handler');
     }
+    public function index(){
+        if(isset($_SESSION['user_id'])){
+            redirect(URL.'dashboard');
+        }else{
+            $data['title'] = 'Sign In';
+            $this->load->view('auth', $data);
+        }
+    }
     public function changePassword(){
         $data['title'] = 'Change Password';
         $data['main_content'] = 'dashboard/change-password';
 
         $this->load->view("dashboard",$data);
     }
-    public function index()
-	{
-        if($this->session->userdata('user_id')){
-            redirect(URL.'dashboard');
-        }else{
-            $data['title'] = 'Sign In';
-            $this->load->view('auth', $data);
-        }
-	}
+
     public function dashboard()
     {
         $data['title'] = 'Dashboard';
