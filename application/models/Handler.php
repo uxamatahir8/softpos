@@ -70,6 +70,26 @@ class Handler extends CI_Model
                 ->get('expense');
 
         return $query->result_array();
-
     }
+    public function getUnits(){
+        $query = $this
+                ->db
+                ->select('units.id as unit_id, units.name, units.qty, categories.name as cat_name, categories.id')
+                ->join('categories', 'categories.id=units.cat_id','inner')
+                ->get('units');
+
+        return $query->result_array();
+    }
+
+    public function getUnitsById($unit_id){
+        $query = $this
+            ->db
+            ->select('units.id as unit_id, units.name, units.qty, categories.name as cat_name, categories.id')
+            ->where('units.id',$unit_id)
+            ->join('categories', 'categories.id=units.cat_id','inner')
+            ->get('units');
+
+        return $query->row();
+    }
+
 }

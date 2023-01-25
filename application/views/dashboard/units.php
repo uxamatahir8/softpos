@@ -4,29 +4,36 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header">
-                    <?=($mode == 'edit') ? 'Update' : 'Add'; ?> Category
+                    <?=($mode == 'edit') ? 'Update' : 'Add'; ?> Unit
                     <hr>
                 </div>
                 <div class="card-body">
-                    <form id="add-category" method="post"
-                          action="<?= URL ?>home/<?=($mode == 'edit') ? 'updateProductCategory' : 'addProductCategory' ?>">
+                    <form id="add-unit" method="post"
+                          action="<?= URL ?>home/<?=($mode == 'edit') ? 'updateProductUnit' : 'addProductUnit' ?>">
                         <?php
                         if ($mode == 'edit') {
                             ?>
-                            <input type="hidden" name="cat_id"
-                                   value="<?=($mode == 'edit') ? str_encode($category->id) : NULL; ?>" id="cat_id"
+                            <input type="hidden" name="unit_id"
+                                   value="<?=($mode == 'edit') ? str_encode($unit->unit_id) : NULL; ?>" id="unit_id"
                                    class="form-control mb-2" placeholder="Category">
                         <?php } ?>
+                        <select class="form-select mb-2" name="cat_id" id="cat_id">
+                            <option value="">Select Category</option>
+                            <?= dropDown($categories, ($mode == 'edit') ? str_encode($unit->id) : NULL); ?>
+                        </select>
                         <input type="text" name="name"
-                               value="<?=($mode == 'edit') ? $category->name : NULL; ?>" id="name"
-                               class="form-control mb-2" placeholder="Category Name">
+                               value="<?=($mode == 'edit') ? $unit->name : NULL; ?>" id="name"
+                               class="form-control mb-2" placeholder="Unit Name">
+                        <input type="number" name="qty"
+                               value="<?=($mode == 'edit') ? $unit->qty : NULL; ?>" required min="1" id="qty"
+                               class="form-control mb-2" placeholder="Qty">
                         <hr>
                         <button class="btn btn-<?=($mode == 'edit') ? 'warning' : 'primary'; ?>" type="submit">
-                            <?=($mode == 'edit') ? 'Update' : 'Add' ?> Category
+                            <?=($mode == 'edit') ? 'Update' : 'Add' ?> Unit
                         </button>
                         <?php
                         if ($mode == 'edit') { ?>
-                            <a href="<?= URL ?>categories"
+                            <a href="<?= URL ?>units"
                                class="btn btn-default">
                                 Cancel
                             </a>
@@ -38,7 +45,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    Categories
+                    Units
                     <hr>
                 </div>
                 <div class="card-body">
@@ -47,27 +54,35 @@
                             <thead>
                             <tr>
                                 <th>Sr#</th>
+                                <th>Unit Name</th>
                                 <th>Category</th>
+                                <th>Qty</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php
-                            if ($categories) {
+                            if ($units) {
                                 $count = 1;
-                                foreach ($categories as $category) { ?>
+                                foreach ($units as $unit) { ?>
                                     <tr>
                                         <td><?= $count; ?></td>
                                         <td>
-                                            <?= $category['name']; ?>
+                                            <?= $unit['name']; ?>
                                         </td>
                                         <td>
-                                            <a href="<?= URL ?>categories/edit/<?= str_encode($category['id']); ?>/"
+                                            <?= $unit['cat_name']; ?>
+                                        </td>
+                                        <td>
+                                            <?= $unit['qty']; ?>
+                                        </td>
+                                        <td>
+                                            <a href="<?= URL ?>units/edit/<?= str_encode($unit['unit_id']); ?>/"
                                                class="btn btn-primary btn-sm">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <button class="btn btn-danger btn-sm del_category"
-                                                    data-id="<?= str_encode($category['id']); ?>">
+                                            <button class="btn btn-danger btn-sm del_unit"
+                                                    data-id="<?= str_encode($unit['unit_id']); ?>">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </td>
@@ -76,7 +91,7 @@
                                 }
                             } else { ?>
                                 <tr>
-                                    <td colspan="3" class="text-center">No Data Found</td>
+                                    <td colspan="4" class="text-center">No Data Found</td>
                                 </tr>
                             <?php } ?>
                             </tbody>

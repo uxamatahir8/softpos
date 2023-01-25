@@ -106,6 +106,35 @@ $(function () {
             remoeveError();
         }
     });
+
+    $('#add-unit').submit(function(e){
+        let cat_id = $('#cat_id').val();
+        let name = $('#name').val();
+        let qty = $('#qty').val();
+
+        let check = 'Pass';
+
+
+        if (cat_id == '') {
+            show_error('Please Select Category From Dropdown');
+            check = 'Fail';
+        }else if(name == ''){
+            show_error('Unit Name Field Cannot Be Empty');
+            check = 'Fail';
+        }else if(qty == ''){
+            show_error('Please Enter Quantity for The Unit');
+            check = 'Fail';
+        }
+
+
+        if (check == 'Fail') {
+            e.preventDefault();
+        } else {
+            removeError();
+        }
+
+    });
+
     $('body').on('click', '.del_expense_type', function () {
         let tr = $(this).closest('tr');
         let id = $(this).attr('data-id');
@@ -164,6 +193,41 @@ $(function () {
                     success: function (res) {
                         if(res == 'true'){
                             tr.remove();
+                            location.reload();
+                        }
+                    }
+                });
+            }
+        });
+    });
+
+    $('body').on('click', '.del_unit', function () {
+        let tr = $(this).closest('tr');
+        let id = $(this).attr('data-id');
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            customClass: {
+                confirmButton: 'btn btn-danger me-3',
+                cancelButton: 'btn btn-label-secondary'
+            },
+            buttonsStyling: false
+        }).then(function (result) {
+            if (result.value) {
+                $.ajax({
+                    url: base + 'service/delUnit',
+                    type: 'POST',
+                    data: { id: id },
+                    dataType: "json",
+                    async: false,
+                    success: function (res) {
+                        if(res == 'true'){
+                            tr.remove();
+                            location.reload();
                         }
                     }
                 });

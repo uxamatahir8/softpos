@@ -14,6 +14,7 @@
                                 <th>Previous(PKR)</th>
                                 <th>Transaction(PKR)</th>
                                 <th>After(PKR)</th>
+                                <th>Cash Type</th>
                                 <th>Date</th>
                             </tr>
                         </thead>
@@ -28,7 +29,7 @@
                                     <td><?= $cash_detail['previous_cash']; ?></td>
                                     <td>
                                         <?= $cash_detail['cash']; ?>
-                                        <span class="badge bg-<?= ($cash_detail['type'] == 'Cash In') ? 'success' : 'danger' ?>"><?= ($cash_detail['type'] == 'Cash In') ? 'In' : 'Out'; ?></span>
+
                                     </td>
                                     <td>
                                         <?php
@@ -39,6 +40,9 @@
                                             }
                                         ?>
 
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-<?= ($cash_detail['type'] == 'Cash In') ? 'success' : 'danger' ?>"><?= $cash_detail['type']; ?></span>
                                     </td>
 
 

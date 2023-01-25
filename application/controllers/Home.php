@@ -14,6 +14,7 @@ class Home extends CI_Controller {
             $this->load->view('auth', $data);
         }
     }
+
     public function changePassword(){
         $data['title'] = 'Change Password';
         $data['main_content'] = 'dashboard/change-password';
@@ -141,7 +142,6 @@ class Home extends CI_Controller {
 
         }
     }
-
     public function productCategories($mode='', $cat_id=''){
         $data['title'] = 'Categories';
         $data['main_content'] = 'dashboard/categories';
@@ -192,4 +192,41 @@ class Home extends CI_Controller {
             redirect(URL . 'categories');
         }
     }
+
+    public function productUnits($mode='', $unit_id=''){
+        $data['title'] = 'Categories';
+        $data['main_content'] = 'dashboard/units';
+        $data['mode'] = 'normal';
+
+        if($mode != '' && $unit_id != ''){
+            $data['mode'] = 'edit';
+            $id = str_decode($unit_id);
+            $data['unit'] = $this->handler->getUnitsById($id);
+        }
+
+        $data['units']= $this->handler->getUnits();
+        $data['categories']= $this->handler->select('categories');
+
+        $this->load->view('dashboard',$data);
+    }
+
+    public function addProductUnit(){
+        $cat_id = $this->input->post('cat_id');
+        $unit_name = $this->input->post('name');
+        $qty = $this->input->post('qty');
+        $data = array(
+            'cat_id' => str_decode($cat_id),
+            'name' => $unit_name,
+            'qty' => $qty
+        );
+
+        $insert = $this->db->insert('units', $data);
+
+        if($insert){
+            $this->session->set_flashdata('message_type', 'success');
+            $this->session->set_flashdata('message', 'Unit Added Successfully');
+            redirect(URL . 'units');
+        }
+    }
+
 }
