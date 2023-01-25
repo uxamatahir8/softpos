@@ -228,5 +228,4 @@ class Home extends CI_Controller {
             redirect(URL . 'units');
         }
     }
-
 }
