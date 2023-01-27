@@ -19,23 +19,18 @@
             </a>
         </li>
 
-        <li class="menu-item <?= ($main_content == 'dashboard/categories' || $main_content == 'dashboard/units')  ? 'active open' : NULL ?>">
+        <li class="menu-item <?= ($main_content == 'dashboard/products' ||
+                                $main_content == 'dashboard/manage-product') ? 'active open' : NULL ?>">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-package"></i>
                 <div data-i18n="Dashboards">Products Manager</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item <?= ($main_content == 'dashboard/categories') ? 'active' : NULL ?>">
-                    <a href="<?= URL ?>categories" class="menu-link">
-                        <div data-i18n="Analytics">Categories</div>
+                <li class="menu-item <?= ($main_content == 'dashboard/products' || $main_content == 'dashboard/manage-product') ? 'active' : NULL ?>">
+                    <a href="<?= URL ?>products" class="menu-link">
+                        <div data-i18n="Analytics">Products</div>
                     </a>
                 </li>
-                <li class="menu-item <?= ($main_content == 'dashboard/units') ? 'active' : NULL ?>">
-                    <a href="<?= URL ?>units" class="menu-link">
-                        <div data-i18n="Dashboards">Units</div>
-                    </a>
-                </li>
-
             </ul>
         </li>
 
@@ -54,22 +49,46 @@
 
 
 
-        <li class="menu-item <?= ($main_content == 'dashboard/expense-types' || $main_content == 'dashboard/change-password') ? 'active open' : NULL ?>">
+        <li class="menu-item <?= ($main_content == 'dashboard/expense-types' ||
+                                    $main_content == 'dashboard/change-password' ||
+                                    $main_content == 'dashboard/categories' ||
+                                    $main_content == 'dashboard/units' ||
+                                    $main_content == 'dashboard/brands') ? 'active open' : NULL ?>">
             <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons ti ti-settings"></i>
                 <div data-i18n="Dashboards">Settings</div>
             </a>
             <ul class="menu-sub">
-                <li class="menu-item <?= ($main_content == 'dashboard/change-password') ? 'active' : NULL ?>">
-                    <a href="<?= URL ?>change-password" class="menu-link">
-                        <div data-i18n="Analytics">Change Password</div>
+                <li class="menu-item <?= ($main_content == 'dashboard/categories') ? 'active' : NULL ?>">
+                    <a href="<?= URL ?>categories" class="menu-link">
+                        <div data-i18n="Analytics">Categories</div>
                     </a>
                 </li>
+                <li class="menu-item <?= ($main_content == 'dashboard/units') ? 'active' : NULL ?>">
+                    <a href="<?= URL ?>units" class="menu-link">
+                        <div data-i18n="Dashboards">Units</div>
+                    </a>
+                </li>
+
+
+                <li class="menu-item <?= ($main_content == 'dashboard/brands') ? 'active' : NULL ?>">
+                    <a href="<?= URL ?>brands" class="menu-link">
+                        <div data-i18n="Dashboards">Brands</div>
+                    </a>
+                </li>
+
                 <li class="menu-item <?= ($main_content == 'dashboard/expense-types') ? 'active' : NULL ?>">
                     <a href="<?= URL ?>expense-type" class="menu-link">
                         <div data-i18n="Dashboards">Expense Types</div>
                     </a>
                 </li>
+
+                <li class="menu-item <?= ($main_content == 'dashboard/change-password') ? 'active' : NULL ?>">
+                    <a href="<?= URL ?>change-password" class="menu-link">
+                        <div data-i18n="Analytics">Change Password</div>
+                    </a>
+                </li>
+
 
             </ul>
         </li>

@@ -38,7 +38,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    Categories
+                    <?=  $title; ?>
                     <hr>
                 </div>
                 <div class="card-body">

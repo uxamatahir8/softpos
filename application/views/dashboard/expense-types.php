@@ -38,7 +38,7 @@
         <div class="col-md-7">
             <div class="card">
                 <div class="card-header">
-                    Expense Types
+                    <?= $title; ?>
                     <hr>
                 </div>
                 <div class="card-body">

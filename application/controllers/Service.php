@@ -80,4 +80,47 @@ class Service extends CI_Controller
             echo json_encode('true');
         }
     }
+
+    public function delBrand(){
+        $brand_id = $this->input->post('id');
+        $id = str_decode($brand_id);
+
+
+        $result = $this->handler->delete('brands', 'id', $id);
+        if($result){
+            echo json_encode('true');
+        }
+    }
+
+    public function getUnitsByCatId(){
+        $cat_id = $this->input->get('id');
+        $id = str_decode($cat_id);
+
+        $units = $this->handler->select_where('units', 'cat_id', $id, FALSE, FALSE);
+
+        if($units) {
+            $units_arr = [];
+            foreach ($units as $unit) {
+                $unit_new = array(
+                    'id' => str_encode($unit['id']),
+                    'name' => $unit['name']
+                );
+
+                array_push($units_arr, $unit_new);
+            }
+
+            echo json_encode($units_arr);
+        }else{
+            echo json_encode('false');
+        }
+    }
+
+    public function getUnitQtyByUnitId(){
+        $unit_id = $this->input->get('id');
+        $id = str_decode($unit_id);
+
+        $price = $this->handler->getCell('units', 'id',$id,'qty');
+
+        echo json_encode($price);
+    }
 }

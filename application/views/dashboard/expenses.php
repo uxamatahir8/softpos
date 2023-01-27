@@ -6,11 +6,11 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-6">
-                            Expenses
+                            <?= $title; ?>
                         </div>
                         <div class="offset-3 col-md-3">
                             <span class="align-content-end">
-                                <a class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#expenseModal"> <i class="fa fa-plus"></i> Add Expense</a>
+                                <a class="btn btn-primary text-white" data-bs-toggle="modal" data-bs-target="#expenseModal"> Add Expense</a>
                             </span>
                         </div>
                     </div>

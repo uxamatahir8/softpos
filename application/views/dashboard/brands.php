@@ -4,36 +4,29 @@
         <div class="col-md-4">
             <div class="card">
                 <div class="card-header">
-                    <?=($mode == 'edit') ? 'Update' : 'Add'; ?> Unit
+                    <?=($mode == 'edit') ? 'Update' : 'Add'; ?> Brand
                     <hr>
                 </div>
                 <div class="card-body">
-                    <form id="add-unit" method="post"
-                          action="<?= URL ?>home/<?=($mode == 'edit') ? 'updateProductUnit' : 'addProductUnit' ?>">
+                    <form id="add-brand" method="post"
+                          action="<?= URL ?>home/<?=($mode == 'edit') ? 'updateProductBrand' : 'addProductBrand' ?>">
                         <?php
                         if ($mode == 'edit') {
                             ?>
-                            <input type="hidden" name="unit_id"
-                                   value="<?=($mode == 'edit') ? str_encode($unit->unit_id) : NULL; ?>" id="unit_id"
+                            <input type="hidden" name="brand_id"
+                                   value="<?=($mode == 'edit') ? str_encode($brand->id) : NULL; ?>" id="brand_id"
                                    class="form-control mb-2" placeholder="Category">
                         <?php } ?>
-                        <select class="form-select mb-2" name="cat_id" id="cat_id">
-                            <option value="">Select Category</option>
-                            <?= dropDown($categories, ($mode == 'edit') ? str_encode($unit->id) : NULL); ?>
-                        </select>
                         <input type="text" name="name"
-                               value="<?=($mode == 'edit') ? $unit->name : NULL; ?>" id="name"
-                               class="form-control mb-2" placeholder="Unit Name">
-                        <input type="number" name="qty"
-                               value="<?=($mode == 'edit') ? $unit->qty : NULL; ?>" required min="1" id="qty"
-                               class="form-control mb-2" placeholder="Qty">
+                               value="<?=($mode == 'edit') ? $brand->name : NULL; ?>" id="name"
+                               class="form-control mb-2" placeholder="Brand Name">
                         <hr>
                         <button class="btn btn-<?=($mode == 'edit') ? 'warning' : 'primary'; ?>" type="submit">
-                            <?=($mode == 'edit') ? 'Update' : 'Add' ?> Unit
+                            <?=($mode == 'edit') ? 'Update' : 'Add' ?> Brand
                         </button>
                         <?php
                         if ($mode == 'edit') { ?>
-                            <a href="<?= URL ?>units"
+                            <a href="<?= URL ?>brands"
                                class="btn btn-default">
                                 Cancel
                             </a>
@@ -54,35 +47,27 @@
                             <thead>
                             <tr>
                                 <th>Sr#</th>
-                                <th>Unit Name</th>
-                                <th>Category</th>
-                                <th>Qty</th>
+                                <th>Brand</th>
                                 <th>Action</th>
                             </tr>
                             </thead>
                             <tbody>
                             <?php
-                            if ($units) {
+                            if ($brands) {
                                 $count = 1;
-                                foreach ($units as $unit) { ?>
+                                foreach ($brands as $brand) { ?>
                                     <tr>
                                         <td><?= $count; ?></td>
                                         <td>
-                                            <?= $unit['name']; ?>
+                                            <?= $brand['name']; ?>
                                         </td>
                                         <td>
-                                            <?= $unit['cat_name']; ?>
-                                        </td>
-                                        <td>
-                                            <?= $unit['qty']; ?>
-                                        </td>
-                                        <td>
-                                            <a href="<?= URL ?>units/edit/<?= str_encode($unit['unit_id']); ?>/"
+                                            <a href="<?= URL ?>brands/edit/<?= str_encode($brand['id']); ?>/"
                                                class="btn btn-primary btn-sm">
                                                 <i class="fa fa-edit"></i>
                                             </a>
-                                            <button class="btn btn-danger btn-sm del_unit"
-                                                    data-id="<?= str_encode($unit['unit_id']); ?>">
+                                            <button class="btn btn-danger btn-sm del_brand"
+                                                    data-id="<?= str_encode($brand['id']); ?>">
                                                 <i class="fa fa-trash"></i>
                                             </button>
                                         </td>
@@ -91,7 +76,7 @@
                                 }
                             } else { ?>
                                 <tr>
-                                    <td colspan="4" class="text-center">No Data Found</td>
+                                    <td colspan="3" class="text-center">No Data Found</td>
                                 </tr>
                             <?php } ?>
                             </tbody>

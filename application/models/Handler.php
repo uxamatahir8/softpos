@@ -26,9 +26,9 @@ class Handler extends CI_Model
             ->where($column, $condition)
             ->get($table);
 
-        if (!$count) {
+        if (!$count && $single) {
             return $query->row();
-        } else if (!$single) {
+        } else if (!$single && !$count) {
             return $query->result_array();
         } else {
             return $query->num_rows();

@@ -109,7 +109,6 @@ class Home extends CI_Controller {
             'remarks' => $remarks
         );
 
-
         $insert = $this->db->insert('expense',$data_insert);
 
         if($insert){
@@ -194,7 +193,7 @@ class Home extends CI_Controller {
     }
 
     public function productUnits($mode='', $unit_id=''){
-        $data['title'] = 'Categories';
+        $data['title'] = 'Units';
         $data['main_content'] = 'dashboard/units';
         $data['mode'] = 'normal';
 
@@ -228,4 +227,110 @@ class Home extends CI_Controller {
             redirect(URL . 'units');
         }
     }
+
+    public function updateProductUnit(){
+        $unit_id = $this->input->post('unit_id');
+        $id = str_decode($unit_id);
+        $cat_id = $this->input->post('cat_id');
+        $unit_name = $this->input->post('name');
+        $qty = $this->input->post('qty');
+        $data = array(
+            'cat_id' => str_decode($cat_id),
+            'name' => $unit_name,
+            'qty' => $qty
+        );
+
+        $insert = $this
+                    ->db
+                    ->where("id",$id)
+                    ->update('units', $data);
+
+        if($insert){
+            $this->session->set_flashdata('message_type', 'success');
+            $this->session->set_flashdata('message', 'Unit Updated Successfully');
+            redirect(URL . 'units');
+        }
+    }
+
+    public function productBrands($mode = '', $brand_id=''){
+        $data['title'] = 'Brands';
+        $data['main_content'] = 'dashboard/brands';
+        $data['mode'] = 'normal';
+
+        if($mode != '' && $brand_id != ''){
+            $data['mode'] = 'edit';
+            $id = str_decode($brand_id);
+            $data['brand'] = $this->handler->select_where('brands','id',$id);
+        }
+
+        $data['brands']= $this->handler->select('brands');
+
+        $this->load->view('dashboard',$data);
+    }
+
+    public function addProductBrand(){
+        $name = $this->input->post('name');
+        $data = array(
+            'name' => $name
+        );
+
+        $insert = $this->db->insert('brands', $data);
+
+        if($insert){
+            $this->session->set_flashdata('message_type', 'success');
+            $this->session->set_flashdata('message', 'Brand Added Successfully');
+            redirect(URL . 'brands');
+        }
+    }
+
+
+    public function updateProductBrand(){
+        $brand_id = $this->input->post('brand_id');
+        $id = str_decode($brand_id);
+        $name = $this->input->post('name');
+
+
+        $data = array(
+            'name' => $name
+        );
+
+        $update = $this
+            ->db
+            ->where("id",$id)
+            ->update('brands', $data);
+
+        if($update){
+            $this->session->set_flashdata('message_type', 'success');
+            $this->session->set_flashdata('message', 'Brand Updated Successfully');
+            redirect(URL . 'brands');
+        }
+    }
+
+    public function products(){
+        $data['title'] = 'Products';
+        $data['main_content'] = 'dashboard/products';
+
+        $this->load->view('dashboard',$data);
+    }
+
+    public function manageProduct($mode = 'add', $product_id = ''){
+
+        if($mode == 'add' && empty($product_id)){
+            $title = 'Add Product';
+        }else if($mode == 'edit' && !empty($product_id)){
+            $title = 'Edit Product';
+        }else if($mode== 'view' && !empty($product_id)){
+            $title = 'View Product';
+        }
+
+        $data['title'] = $title;
+        $data['main_content'] = 'dashboard/manage-product';
+        $data['mode'] = $mode;
+
+        $data['categories']= $this->handler->select('categories');
+        $data['brands']= $this->handler->select('brands');
+
+        $this->load->view('dashboard',$data);
+    }
+
 }

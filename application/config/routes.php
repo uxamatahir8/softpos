@@ -62,6 +62,13 @@ $route['categories/(:any)/(:any)'] = 'home/productCategories/$1/$2';
 $route['units'] = 'home/productUnits';
 $route['units/(:any)/(:any)'] = 'home/productUnits/$1/$2';
 
+$route['brands'] = 'home/productBrands';
+$route['brands/(:any)/(:any)'] = 'home/productBrands/$1/$2';
+
+$route['products'] = 'home/products';
+$route['product/add'] = 'home/manageProduct';
+$route['product/(:any)/(:any)'] = 'home/manageProduct/$1/$2';
+
 $route['expenses'] = 'home/expenses';
 
 $route['cash-register'] = 'home/cashRegister';

@@ -107,6 +107,16 @@ $(function () {
         }
     });
 
+    $("#add-brand").submit(function(e){
+        let name = $('#name').val();
+        if (name == '') {
+            show_error('Brand Name Field Cannot Be Empty');
+            e.preventDefault();
+        } else {
+            remoeveError();
+        }
+    });
+
     $('#add-unit').submit(function(e){
         let cat_id = $('#cat_id').val();
         let name = $('#name').val();
@@ -233,6 +243,103 @@ $(function () {
                 });
             }
         });
+    });
+
+    $('body').on('click', '.del_brand', function () {
+        let tr = $(this).closest('tr');
+        let id = $(this).attr('data-id');
+
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            customClass: {
+                confirmButton: 'btn btn-danger me-3',
+                cancelButton: 'btn btn-label-secondary'
+            },
+            buttonsStyling: false
+        }).then(function (result) {
+            if (result.value) {
+                $.ajax({
+                    url: base + 'service/delBrand',
+                    type: 'POST',
+                    data: { id: id },
+                    dataType: "json",
+                    async: false,
+                    success: function (res) {
+                        if(res == 'true'){
+                            tr.remove();
+                            location.reload();
+                        }
+                    }
+                });
+            }
+        });
+    });
+
+    $('#cat_id').change(function(){
+        let cat_id = $(this).val();
+        $("#unit_id option").remove();
+        $('#qty_in_unit').val('');
+        $('#add_qty').val('');
+        $("#add_qty").attr('readonly','readonly');
+        $('#total_qty').val("");
+
+        let option;
+
+        $.ajax({
+            url: base + 'service/getUnitsByCatId',
+            type: 'GET',
+            data: { id: cat_id },
+            dataType: "json",
+            async: false,
+            success: function (res) {
+                if(res == 'false'){
+                    option += "<option val=''>Select Other Category</option>";
+                    show_error('This Category has no units');
+                }else{
+                    var strJSON = JSON.stringify(res);
+                    var data = JSON.parse(strJSON);
+                    let i;
+                    removeError();
+                    option += "<option val=''>Select Unit</option>";
+                    for(i=0; i<data.length; i++){
+                        option += "<option value='"+ data[i].id +"'>"+ data[i].name +"</option>";
+                    }
+                }
+                $("#unit_id").append(option);
+            }
+        });
+    });
+    $("#unit_id").change(function (){
+        let unit_id = $(this).val();
+        $('#qty_in_unit').val('');
+        $('#add_qty').val('');
+        $("#add_qty").attr('readonly','readonly');
+        $('#total_qty').val("");
+
+
+        $.ajax({
+            url: base + 'service/getUnitQtyByUnitId',
+            type: 'GET',
+            data: { id: unit_id },
+            dataType: "json",
+            async: false,
+            success: function (res) {
+                $('#add_qty').val('');
+                $("#add_qty").removeAttr('readonly','readonly');
+                $('#qty_in_unit').val(res);
+            }
+        });
+    });
+
+    $("body").on('change keypress keyup','#add_qty', function(){
+        let qty_in_unit = parseInt($("#qty_in_unit").val());
+        let add_qty = parseInt($('#add_qty').val());
+        let new_qty = qty_in_unit * add_qty;
+        $('#total_qty').val(new_qty);
     });
 });
 function show_error(error_message) {
