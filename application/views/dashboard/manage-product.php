@@ -39,7 +39,7 @@
                                     <input type="text" name="name" id="name" class="form-control name" placeholder="Product Name">
                                 </div>
                             </div>
-                            <div class="form-group row">
+                            <div class="form-group row my-2">
                                 <div class="col-md-3">
                                     <label for="unit_id" class="form-label">Select Qty Unit:</label>
                                     <select name="unit_id" id="unit_id" class="form-select unit_id">
@@ -57,6 +57,24 @@
                                 <div class="col-md-3">
                                     <label for="total_qty" class="form-label">Total Qty:</label>
                                     <input type="text" class="form-control total_qty" id="total_qty" name="total_qty" readonly placeholder="Total Qty">
+                                </div>
+                            </div>
+                            <div class="form-group row my-2">
+                                <div class="col-md-3">
+                                    <label for="purchase_price" class="form-label">Purchase Price:</label>
+                                    <input type="text" class="form-control purchase_price" id="purchase_price" placeholder="Purchase Price">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="sale_price" class="form-label">Sale Price:</label>
+                                    <input type="text" class="form-control sale_price" id="sale_price" placeholder="Sale Price">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="purchase_price_per_qty" class="form-label">Purchase Price Per Qty:</label>
+                                    <input type="text" class="form-control purchase_price_per_qty" id="purchase_price_per_qty" readonly placeholder="Purchase Price Per Qty">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="sale_price_per_qty" class="form-label">Sale Price Per Qty:</label>
+                                    <input type="text" class="form-control sale_price_per_qty" id="sale_price_per_qty" readonly placeholder="Sale Price Per Qty">
                                 </div>
                             </div>
                         </form>

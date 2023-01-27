@@ -106,7 +106,6 @@ $(function () {
             remoeveError();
         }
     });
-
     $("#add-brand").submit(function(e){
         let name = $('#name').val();
         if (name == '') {
@@ -116,15 +115,11 @@ $(function () {
             remoeveError();
         }
     });
-
     $('#add-unit').submit(function(e){
         let cat_id = $('#cat_id').val();
         let name = $('#name').val();
         let qty = $('#qty').val();
-
         let check = 'Pass';
-
-
         if (cat_id == '') {
             show_error('Please Select Category From Dropdown');
             check = 'Fail';
@@ -135,20 +130,15 @@ $(function () {
             show_error('Please Enter Quantity for The Unit');
             check = 'Fail';
         }
-
-
         if (check == 'Fail') {
             e.preventDefault();
         } else {
             removeError();
         }
-
     });
-
     $('body').on('click', '.del_expense_type', function () {
         let tr = $(this).closest('tr');
         let id = $(this).attr('data-id');
-
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -180,7 +170,6 @@ $(function () {
     $('body').on('click', '.del_category', function () {
         let tr = $(this).closest('tr');
         let id = $(this).attr('data-id');
-
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -210,11 +199,9 @@ $(function () {
             }
         });
     });
-
     $('body').on('click', '.del_unit', function () {
         let tr = $(this).closest('tr');
         let id = $(this).attr('data-id');
-
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -244,11 +231,9 @@ $(function () {
             }
         });
     });
-
     $('body').on('click', '.del_brand', function () {
         let tr = $(this).closest('tr');
         let id = $(this).attr('data-id');
-
         Swal.fire({
             title: 'Are you sure?',
             text: "You won't be able to revert this!",
@@ -278,7 +263,6 @@ $(function () {
             }
         });
     });
-
     $('#cat_id').change(function(){
         let cat_id = $(this).val();
         $("#unit_id option").remove();
@@ -286,9 +270,11 @@ $(function () {
         $('#add_qty').val('');
         $("#add_qty").attr('readonly','readonly');
         $('#total_qty').val("");
-
+        $('#purchase_price').val("");
+        $('#sale_price').val("");
+        $('#purchase_price_per_qty').val("");
+        $('#sale_price_per_qty').val("");
         let option;
-
         $.ajax({
             url: base + 'service/getUnitsByCatId',
             type: 'GET',
@@ -296,17 +282,14 @@ $(function () {
             dataType: "json",
             async: false,
             success: function (res) {
-                if(res == 'false'){
-                    option += "<option val=''>Select Other Category</option>";
-                    show_error('This Category has no units');
-                }else{
-                    var strJSON = JSON.stringify(res);
-                    var data = JSON.parse(strJSON);
-                    let i;
-                    removeError();
-                    option += "<option val=''>Select Unit</option>";
+                var strJSON = JSON.stringify(res);
+                var data = JSON.parse(strJSON);
+                let i;
+                option += "<option value=''>Select Unit</option>";
+                option += "<option value='single'>Single (1)</option>";
+                if(res != 'false'){
                     for(i=0; i<data.length; i++){
-                        option += "<option value='"+ data[i].id +"'>"+ data[i].name +"</option>";
+                        option += "<option value='"+ data[i].id +"'>"+ data[i].name +" ("+ data[i].qty +")</option>";
                     }
                 }
                 $("#unit_id").append(option);
@@ -319,27 +302,70 @@ $(function () {
         $('#add_qty').val('');
         $("#add_qty").attr('readonly','readonly');
         $('#total_qty').val("");
-
-
-        $.ajax({
-            url: base + 'service/getUnitQtyByUnitId',
-            type: 'GET',
-            data: { id: unit_id },
-            dataType: "json",
-            async: false,
-            success: function (res) {
-                $('#add_qty').val('');
-                $("#add_qty").removeAttr('readonly','readonly');
-                $('#qty_in_unit').val(res);
-            }
-        });
+        $('#purchase_price').val("");
+        $('#sale_price').val("");
+        $('#purchase_price_per_qty').val("");
+        $('#sale_price_per_qty').val("");
+        if(unit_id == 'single'){
+            $('#add_qty').val('');
+            $("#add_qty").removeAttr('readonly','readonly');
+            $('#qty_in_unit').val(1);
+        }else{
+            $.ajax({
+                url: base + 'service/getUnitQtyByUnitId',
+                type: 'GET',
+                data: { id: unit_id },
+                dataType: "json",
+                async: false,
+                success: function (res) {
+                    $('#add_qty').val('');
+                    $("#add_qty").removeAttr('readonly','readonly');
+                    $('#qty_in_unit').val(res);
+                }
+            });
+        }
     });
-
     $("body").on('change keypress keyup','#add_qty', function(){
+        $('#purchase_price').val("");
+        $('#sale_price').val("");
+        $('#purchase_price_per_qty').val("");
+        $('#sale_price_per_qty').val("");
         let qty_in_unit = parseInt($("#qty_in_unit").val());
         let add_qty = parseInt($('#add_qty').val());
         let new_qty = qty_in_unit * add_qty;
         $('#total_qty').val(new_qty);
+    });
+    $("body").on('change keypress keyup','#purchase_price', function(){
+        let purchase_price = $(this).val();
+        let qty_in_unit = $("#qty_in_unit").val();
+        let sale_price = $('#sale_price').val();
+        let check;
+        if(sale_price != ''){
+            if(parseInt(purchase_price) >= parseInt(sale_price)){
+                show_error('Purchase Price Cannot Be Greater Than Sale Price');
+                check = 'Fail';
+            }else{
+                check = 'Pass';
+            }
+        }else {
+            check = 'Pass';
+        }
+        if(check == 'Pass'){
+            removeError();
+            let purchase_price_per_qty = parseInt(purchase_price) / parseInt(qty_in_unit);
+            $('#purchase_price_per_qty').val(purchase_price_per_qty.toFixed(2));
+        }else{
+            $('#purchase_price').val("");
+            $('#purchase_price_per_qty').val("");
+        }
+    });
+    $("body").on('change keypress keyup','#sale_price', function(){
+        let sale_price = $(this).val();
+        let qty_in_unit = $("#qty_in_unit").val();
+
+        let sale_price_per_qty = parseInt(sale_price) / parseInt(qty_in_unit);
+        $('#sale_price_per_qty').val(sale_price_per_qty.toFixed(2));
+
     });
 });
 function show_error(error_message) {

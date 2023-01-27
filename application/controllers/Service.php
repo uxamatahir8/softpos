@@ -103,7 +103,8 @@ class Service extends CI_Controller
             foreach ($units as $unit) {
                 $unit_new = array(
                     'id' => str_encode($unit['id']),
-                    'name' => $unit['name']
+                    'name' => $unit['name'],
+                    'qty' => $unit['qty']
                 );
 
                 array_push($units_arr, $unit_new);
