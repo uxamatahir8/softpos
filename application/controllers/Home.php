@@ -310,6 +310,9 @@ class Home extends CI_Controller {
         $data['title'] = 'Products';
         $data['main_content'] = 'dashboard/products';
 
+        $data['products'] = $this->handler->getProducts();
+
+
         $this->load->view('dashboard',$data);
     }
 
@@ -323,6 +326,13 @@ class Home extends CI_Controller {
             $title = 'View Product';
         }
 
+
+        if(isset($product_id) && !empty($product_id)){
+            $id = str_decode($product_id);
+            $data['product'] = $this->handler->getProductById($id);
+        }
+
+
         $data['title'] = $title;
         $data['main_content'] = 'dashboard/manage-product';
         $data['mode'] = $mode;
@@ -331,6 +341,37 @@ class Home extends CI_Controller {
         $data['brands']= $this->handler->select('brands');
 
         $this->load->view('dashboard',$data);
+    }
+
+    public function addNewProduct(){
+        $brand_id = str_decode($this->input->post('brand_id'));
+        $cat_id = str_decode($this->input->post('cat_id'));
+        $name = $this->input->post('name');
+        $stock_alert = $this->input->post('stock_alert');
+        $curr_qty = $this->input->post('total_qty');
+        $purchase_price = $this->input->post('purchase_price_per_qty');
+        $sale_price = $this->input->post('sale_price_per_qty');
+
+
+        $data = array(
+            'brand_id' => $brand_id,
+            'cat_id' => $cat_id,
+            'name' => $name,
+            'stock_alert' => $stock_alert,
+            'curr_qty' => $curr_qty,
+            'purchase_price' => $purchase_price,
+            'sale_price' => $sale_price
+        );
+
+        $insert = $this->db->insert('products',$data);
+
+
+        if($insert){
+            $this->session->set_flashdata('message_type','success');
+            $this->session->set_flashdata('message','Product Added Successfully');
+            redirect(URL.'products');
+        }
+
     }
 
 }

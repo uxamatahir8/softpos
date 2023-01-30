@@ -92,4 +92,27 @@ class Handler extends CI_Model
         return $query->row();
     }
 
+    public function getProducts(){
+        $query = $this
+                    ->db
+                    ->select('products.*, brands.name as brand_name, categories.name as cat_name')
+                    ->join('brands','brands.id=products.brand_id','inner')
+                    ->join('categories','categories.id=products.cat_id','inner')
+                    ->get('products');
+
+        return $query->result_array();
+    }
+
+    public function getProductById($id){
+        $query = $this
+            ->db
+            ->select('products.*, brands.id as brand_id, brands.name as brand_name, categories.id as cat_id, categories.name as cat_name')
+            ->where('products.id',$id)
+            ->join('brands','brands.id=products.brand_id','inner')
+            ->join('categories','categories.id=products.cat_id','inner')
+            ->get('products');
+
+        return $query->row();
+    }
+
 }

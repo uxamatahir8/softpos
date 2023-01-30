@@ -97,7 +97,7 @@ $(function () {
             remoeveError();
         }
     });
-    $("#add-category").submit(function(e){
+    $("#add-category").submit(function (e) {
         let name = $('#name').val();
         if (name == '') {
             show_error('Category Name Field Cannot Be Empty');
@@ -106,7 +106,7 @@ $(function () {
             remoeveError();
         }
     });
-    $("#add-brand").submit(function(e){
+    $("#add-brand").submit(function (e) {
         let name = $('#name').val();
         if (name == '') {
             show_error('Brand Name Field Cannot Be Empty');
@@ -115,7 +115,7 @@ $(function () {
             remoeveError();
         }
     });
-    $('#add-unit').submit(function(e){
+    $('#add-unit').submit(function (e) {
         let cat_id = $('#cat_id').val();
         let name = $('#name').val();
         let qty = $('#qty').val();
@@ -123,10 +123,10 @@ $(function () {
         if (cat_id == '') {
             show_error('Please Select Category From Dropdown');
             check = 'Fail';
-        }else if(name == ''){
+        } else if (name == '') {
             show_error('Unit Name Field Cannot Be Empty');
             check = 'Fail';
-        }else if(qty == ''){
+        } else if (qty == '') {
             show_error('Please Enter Quantity for The Unit');
             check = 'Fail';
         }
@@ -159,7 +159,7 @@ $(function () {
                     dataType: "json",
                     async: false,
                     success: function (res) {
-                        if(res == 'true'){
+                        if (res == 'true') {
                             tr.remove();
                         }
                     }
@@ -190,7 +190,7 @@ $(function () {
                     dataType: "json",
                     async: false,
                     success: function (res) {
-                        if(res == 'true'){
+                        if (res == 'true') {
                             tr.remove();
                             location.reload();
                         }
@@ -222,7 +222,7 @@ $(function () {
                     dataType: "json",
                     async: false,
                     success: function (res) {
-                        if(res == 'true'){
+                        if (res == 'true') {
                             tr.remove();
                             location.reload();
                         }
@@ -254,7 +254,7 @@ $(function () {
                     dataType: "json",
                     async: false,
                     success: function (res) {
-                        if(res == 'true'){
+                        if (res == 'true') {
                             tr.remove();
                             location.reload();
                         }
@@ -263,12 +263,12 @@ $(function () {
             }
         });
     });
-    $('#cat_id').change(function(){
+    $('#cat_id').change(function () {
         let cat_id = $(this).val();
         $("#unit_id option").remove();
         $('#qty_in_unit').val('');
         $('#add_qty').val('');
-        $("#add_qty").attr('readonly','readonly');
+        $("#add_qty").attr('readonly', 'readonly');
         $('#total_qty').val("");
         $('#purchase_price').val("");
         $('#sale_price').val("");
@@ -287,30 +287,30 @@ $(function () {
                 let i;
                 option += "<option value=''>Select Unit</option>";
                 option += "<option value='single'>Single (1)</option>";
-                if(res != 'false'){
-                    for(i=0; i<data.length; i++){
-                        option += "<option value='"+ data[i].id +"'>"+ data[i].name +" ("+ data[i].qty +")</option>";
+                if (res != 'false') {
+                    for (i = 0; i < data.length; i++) {
+                        option += "<option value='" + data[i].id + "'>" + data[i].name + " (" + data[i].qty + ")</option>";
                     }
                 }
                 $("#unit_id").append(option);
             }
         });
     });
-    $("#unit_id").change(function (){
+    $("#unit_id").change(function () {
         let unit_id = $(this).val();
         $('#qty_in_unit').val('');
         $('#add_qty').val('');
-        $("#add_qty").attr('readonly','readonly');
+        $("#add_qty").attr('readonly', 'readonly');
         $('#total_qty').val("");
         $('#purchase_price').val("");
         $('#sale_price').val("");
         $('#purchase_price_per_qty').val("");
         $('#sale_price_per_qty').val("");
-        if(unit_id == 'single'){
+        if (unit_id == 'single') {
             $('#add_qty').val('');
-            $("#add_qty").removeAttr('readonly','readonly');
+            $("#add_qty").removeAttr('readonly', 'readonly');
             $('#qty_in_unit').val(1);
-        }else{
+        } else {
             $.ajax({
                 url: base + 'service/getUnitQtyByUnitId',
                 type: 'GET',
@@ -319,13 +319,13 @@ $(function () {
                 async: false,
                 success: function (res) {
                     $('#add_qty').val('');
-                    $("#add_qty").removeAttr('readonly','readonly');
+                    $("#add_qty").removeAttr('readonly', 'readonly');
                     $('#qty_in_unit').val(res);
                 }
             });
         }
     });
-    $("body").on('change keypress keyup','#add_qty', function(){
+    $("body").on('change keypress keyup', '#add_qty', function () {
         $('#purchase_price').val("");
         $('#sale_price').val("");
         $('#purchase_price_per_qty').val("");
@@ -335,37 +335,148 @@ $(function () {
         let new_qty = qty_in_unit * add_qty;
         $('#total_qty').val(new_qty);
     });
-    $("body").on('change keypress keyup','#purchase_price', function(){
+    $("body").on('change keypress keyup', '#purchase_price', function () {
         let purchase_price = $(this).val();
         let qty_in_unit = $("#qty_in_unit").val();
         let sale_price = $('#sale_price').val();
         let check;
-        if(sale_price != ''){
-            if(parseInt(purchase_price) >= parseInt(sale_price)){
+        if (sale_price != '') {
+            if (parseInt(purchase_price) >= parseInt(sale_price)) {
                 show_error('Purchase Price Cannot Be Greater Than Sale Price');
                 check = 'Fail';
-            }else{
+            } else {
                 check = 'Pass';
             }
-        }else {
+        } else {
             check = 'Pass';
         }
-        if(check == 'Pass'){
+        if (check == 'Pass') {
             removeError();
             let purchase_price_per_qty = parseInt(purchase_price) / parseInt(qty_in_unit);
             $('#purchase_price_per_qty').val(purchase_price_per_qty.toFixed(2));
-        }else{
+        } else {
             $('#purchase_price').val("");
             $('#purchase_price_per_qty').val("");
         }
     });
-    $("body").on('change keypress keyup','#sale_price', function(){
+    $("body").on('change keypress keyup', '#sale_price', function () {
         let sale_price = $(this).val();
         let qty_in_unit = $("#qty_in_unit").val();
-
         let sale_price_per_qty = parseInt(sale_price) / parseInt(qty_in_unit);
         $('#sale_price_per_qty').val(sale_price_per_qty.toFixed(2));
 
+    });
+
+    $("#product-form").submit(function (e) {
+        let brand_id = $("#brand_id").val();
+        let cat_id = $("#cat_id").val();
+        let name = $("#name").val();
+        let stock_alert = $('#stock_alert').val();
+        let unit_id = $('#unit_id').val();
+        let add_qty = $('#add_qty').val();
+        let purchase_price = $('#purchase_price').val();
+        let sale_price = $('#sale_price').val();
+
+        let total_qty = $('#total_qty').val();
+        let purchase_price_per_qty = parseInt($('#purchase_price_per_qty').val());
+        let sale_price_per_qty = parseInt($('#sale_price_per_qty').val());
+
+        let mode = $('#mode').val();
+
+        let check;
+
+
+        // Add Mode Validation
+
+        if (mode == 'add') {
+            if (unit_id == '') {
+                show_error('Please Select Unit');
+                check = 'Fail';
+            } else if (isNaN(add_qty)) {
+                show_error('Qty Must be a Number');
+                check = 'Fail';
+            } else if (add_qty == '') {
+                show_error('Must Enter Some Quantity');
+                check = 'Fail';
+            } else if (add_qty < 0) {
+                show_error('Quantity Must be Greater Than 0');
+                check = 'Fail';
+            } else if (purchase_price == '') {
+                show_error('Please Enter Purchase Price');
+                check = 'Fail';
+            } else if (sale_price == '') {
+                show_error('Please Enter Sale Price');
+                check = 'Fail';
+            } else if (purchase_price > sale_price) {
+                show_error('Purchase Price Cannot be More than sale price');
+                check = 'Fail';
+            } else if (isNaN(sale_price)) {
+                show_error('Sale Price Must Be a Number');
+                check = 'Fail';
+            } else if (isNaN(purchase_price)) {
+                show_error('Purchase Price Must Be a Number');
+                check = 'Fail';
+            } else if (sale_price < purchase_price) {
+                show_error('Sale Price Cannot be Less Than Purchase Price');
+                check = 'Fail';
+            }
+        }
+
+    
+        // Edit Mode Validation
+
+        if (mode == 'edit') {
+            if (total_qty == '') {
+                show_error('Please Enter Quantity');
+                check = 'Fail';
+            } else if (isNaN(total_qty)) {
+                show_error('Total Quantity Must Be a Number');
+                check = 'Fail';
+            } else if (purchase_price_per_qty == '') {
+                show_error('Please Enter Purchase Price');
+                check = 'Fail';
+            } else if (sale_price_per_qty == '') {
+                show_error('Please Enter Sale Price');
+                check = 'Fail';
+            } else if (purchase_price_per_qty > sale_price_per_qty) {
+                show_error('Purchase Price Cannot be More than sale price');
+                check = 'Fail';
+            } else if (isNaN(sale_price_per_qty)) {
+                show_error('Sale Price Must Be a Number');
+                check = 'Fail';
+            } else if (isNaN(purchase_price_per_qty)) {
+                show_error('Purchase Price Must Be a Number');
+                check = 'Fail';
+            } else if (sale_price_per_qty < purchase_price_per_qty) {
+                show_error('Sale Price Cannot be Less Than Purchase Price');
+                check = 'Fail';
+            }
+        }
+
+        // General Validation
+        
+        if (brand_id == '') {
+            show_error('Please Select Brand');
+            check = 'Fail';
+        } else if (cat_id == '') {
+            show_error('Please Select Category');
+            check = 'Fail';
+        } else if (name == '') {
+            show_error('Please Enter Product Name');
+            check = 'Fail';
+        } else if (isNaN(stock_alert)) {
+            show_error('Value of Stock Alert Must Be a Number');
+            check = 'Fail';
+        } else if (stock_alert == '') {
+            show_error('Please Enter The Value of Stock Alert');
+            check = 'Fail';
+        }
+
+        if (check == 'Fail') {
+            e.preventDefault();
+        } else {
+            removeError();
+        }
     });
 });
 function show_error(error_message) {
