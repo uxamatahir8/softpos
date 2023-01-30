@@ -374,4 +374,39 @@ class Home extends CI_Controller {
 
     }
 
+    public function updateNewProduct(){
+        $id = str_decode($this->input->post('id'));
+        $brand_id = str_decode($this->input->post('brand_id'));
+        $cat_id = str_decode($this->input->post('cat_id'));
+        $name = $this->input->post('name');
+        $stock_alert = $this->input->post('stock_alert');
+        $curr_qty = $this->input->post('total_qty');
+        $purchase_price = $this->input->post('purchase_price_per_qty');
+        $sale_price = $this->input->post('sale_price_per_qty');
+
+
+        $data = array(
+            'brand_id' => $brand_id,
+            'cat_id' => $cat_id,
+            'name' => $name,
+            'stock_alert' => $stock_alert,
+            'curr_qty' => $curr_qty,
+            'purchase_price' => $purchase_price,
+            'sale_price' => $sale_price
+        );
+
+        $update = $this
+                    ->db
+                    ->where('id', $id)
+                    ->update('products',$data);
+
+
+        if($update){
+            $this->session->set_flashdata('message_type','success');
+            $this->session->set_flashdata('message','Product Updated Successfully');
+            redirect(URL.'products');
+        }
+
+    }
+
 }

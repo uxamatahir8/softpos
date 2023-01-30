@@ -266,14 +266,19 @@ $(function () {
     $('#cat_id').change(function () {
         let cat_id = $(this).val();
         $("#unit_id option").remove();
-        $('#qty_in_unit').val('');
-        $('#add_qty').val('');
-        $("#add_qty").attr('readonly', 'readonly');
-        $('#total_qty').val("");
-        $('#purchase_price').val("");
-        $('#sale_price').val("");
-        $('#purchase_price_per_qty').val("");
-        $('#sale_price_per_qty').val("");
+
+        let mode = $('#mode').val();
+
+        if (mode == 'add') {
+            $('#qty_in_unit').val('');
+            $('#add_qty').val('');
+            $("#add_qty").attr('readonly', 'readonly');
+            $('#total_qty').val("");
+            $('#purchase_price').val("");
+            $('#sale_price').val("");
+            $('#purchase_price_per_qty').val("");
+            $('#sale_price_per_qty').val("");
+        }
         let option;
         $.ajax({
             url: base + 'service/getUnitsByCatId',
@@ -422,7 +427,7 @@ $(function () {
             }
         }
 
-    
+
         // Edit Mode Validation
 
         if (mode == 'edit') {
@@ -454,7 +459,7 @@ $(function () {
         }
 
         // General Validation
-        
+
         if (brand_id == '') {
             show_error('Please Select Brand');
             check = 'Fail';
