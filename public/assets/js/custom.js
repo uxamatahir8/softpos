@@ -231,6 +231,40 @@ $(function () {
             }
         });
     });
+
+    $('body').on('click', '.del_product', function () {
+        let tr = $(this).closest('tr');
+        let id = $(this).attr('data-id');
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Yes, delete it!',
+            customClass: {
+                confirmButton: 'btn btn-danger me-3',
+                cancelButton: 'btn btn-label-secondary'
+            },
+            buttonsStyling: false
+        }).then(function (result) {
+            if (result.value) {
+                $.ajax({
+                    url: base + 'service/delProduct',
+                    type: 'POST',
+                    data: { id: id },
+                    dataType: "json",
+                    async: false,
+                    success: function (res) {
+                        if (res == 'true') {
+                            tr.remove();
+                            location.reload();
+                        }
+                    }
+                });
+            }
+        });
+    });
+
     $('body').on('click', '.del_brand', function () {
         let tr = $(this).closest('tr');
         let id = $(this).attr('data-id');

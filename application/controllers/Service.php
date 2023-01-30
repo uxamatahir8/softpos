@@ -124,4 +124,15 @@ class Service extends CI_Controller
 
         echo json_encode($price);
     }
+
+    public function delProduct(){
+        $product_id = $this->input->post('id');
+        $id = str_decode($product_id);
+
+
+        $result = $this->handler->delete('products', 'id', $id);
+        if($result){
+            echo json_encode('true');
+        }
+    }
 }

@@ -53,13 +53,15 @@
                                                 <a href="<?= URL ?>product/edit/<?= str_encode($product['id']) ?>" class="btn btn-info btn-sm">
                                                     <i class="fa fa-pencil"></i>
                                                 </a>
-                                                <button data-id="<?= str_encode($product['id']) ?>" class="btn btn-danger btn-sm">
+                                                <button id="del_product" data-id="<?= str_encode($product['id']) ?>" class="btn btn-danger btn-sm del_product">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                             </td>
                                         </tr>
                                    <?php $count++; } }else {?>
-                                        <td colspan="9"></td>
+                                    <tr>
+                                        <td colspan="9" class="text-center">No Data Found</td>
+                                    </tr>
                                     <?php } ?>
                             </tbody>
                         </table>
