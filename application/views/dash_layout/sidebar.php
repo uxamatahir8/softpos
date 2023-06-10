@@ -18,22 +18,13 @@
                 <div data-i18n="Page 1">Dashboard</div>
             </a>
         </li>
-
-        <li class="menu-item <?= ($main_content == 'dashboard/products' ||
-                                $main_content == 'dashboard/manage-product') ? 'active open' : NULL ?>">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <li class="menu-item <?= ($main_content=='dashboard/products' ||
+            $main_content == 'dashboard/manage-product') ? 'active' : NULL; ?>">
+            <a href="<?= URL ?>products" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-package"></i>
-                <div data-i18n="Dashboards">Products Manager</div>
+                <div data-i18n="Page 1">Products</div>
             </a>
-            <ul class="menu-sub">
-                <li class="menu-item <?= ($main_content == 'dashboard/products' || $main_content == 'dashboard/manage-product') ? 'active' : NULL ?>">
-                    <a href="<?= URL ?>products" class="menu-link">
-                        <div data-i18n="Analytics">Products</div>
-                    </a>
-                </li>
-            </ul>
         </li>
-
         <li class="menu-item <?= ($main_content=='dashboard/expenses') ? 'active' : NULL; ?>">
             <a href="<?= URL ?>expenses" class="menu-link">
                 <i class="menu-icon tf-icons ti ti-currency-dollar"></i>
@@ -46,9 +37,6 @@
                 <div data-i18n="Page 1">Cash Register</div>
             </a>
         </li>
-
-
-
         <li class="menu-item <?= ($main_content == 'dashboard/expense-types' ||
                                     $main_content == 'dashboard/change-password' ||
                                     $main_content == 'dashboard/categories' ||

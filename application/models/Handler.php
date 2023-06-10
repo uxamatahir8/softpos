@@ -95,6 +95,7 @@ class Handler extends CI_Model
     public function getProducts(){
         $query = $this
                     ->db
+                    ->order_by('products.name','ASC')
                     ->select('products.*, brands.name as brand_name, categories.name as cat_name')
                     ->join('brands','brands.id=products.brand_id','inner')
                     ->join('categories','categories.id=products.cat_id','inner')

@@ -71,7 +71,13 @@
                             </div>
                         </div>
                         <div class="mb-3">
-                            <label> What is <span id="first_number"> <?= random_number(1) ?> </span> plus <span id="second_number"> <?= random_number(2); ?> </span> ? </label>
+
+                            <?php
+                                $oper = ['plus','minus','multiple'];
+                                $operate = array_rand($oper);
+                            ?>
+
+                            <label> What is <span id="first_number"><?= random_number(2); ?></span> <span id="operation"><?= $oper[$operate]; ?></span> <span id="second_number"> <?= random_number(1); ?> </span> ? </label>
                             <input type="text" class="form-control" id="answer" name="answer" placeholder="Enter Your Answer" autofocus/>
                         </div>
                         <hr>

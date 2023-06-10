@@ -326,6 +326,12 @@ class Home extends CI_Controller {
             $title = 'View Product';
         }
 
+        if(isset($_GET['param']) && !empty($_GET['param'])){
+            $data['param'] = $_GET['param'];
+        }
+
+
+
 
         if(isset($product_id) && !empty($product_id)){
             $id = str_decode($product_id);
@@ -391,7 +397,7 @@ class Home extends CI_Controller {
             'name' => $name,
             'stock_alert' => $stock_alert,
             'curr_qty' => $curr_qty,
-            'purchase_price' => $purchase_price,
+            'purchase_price' =>  $purchase_price,
             'sale_price' => $sale_price
         );
 
@@ -407,6 +413,32 @@ class Home extends CI_Controller {
             redirect(URL.'products');
         }
 
+    }
+
+    public function addStock(){
+        $id = str_decode($this->input->post('id'));
+
+        $curr_qty = $this->handler->getCell('products', 'id', $id, 'curr_qty');
+
+        $added_qty = $this->input->post('add_qty');
+
+        $new_qty = $curr_qty + $added_qty;
+
+        $data = array(
+            'curr_qty' => $new_qty
+        );
+
+        $update = $this
+                    ->db
+                    ->where('id',$id)
+                    ->update('products', $data);
+
+
+        if($update){
+            $this->session->set_flashdata('message_type','success');
+            $this->session->set_flashdata('message','Product Quantity Updated Successfully');
+            redirect(URL.'products');
+        }
     }
 
 }

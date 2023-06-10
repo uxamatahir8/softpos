@@ -95,6 +95,7 @@
                                         value="<?= ($mode == 'edit') ?  $product->sale_price : NULL ?>" placeholder="Sale Price Per Qty">
                                 </div>
                             </div>
+                            <hr>
                             <div class="form-group row my-4">
                                 <div class="offset-md-8 col-md-4">
                                     <input type="hidden" id="mode" value="<?= $mode; ?>">
@@ -113,3 +114,6 @@
     </div>
 </div>
 <!-- / Content -->
+
+
+

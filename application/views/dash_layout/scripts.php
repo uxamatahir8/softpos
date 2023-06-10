@@ -28,3 +28,17 @@ if($cash_in_hand < 1){ ?>
 }
 ?>
 
+<?php
+if(isset($param) && !empty($param)){
+    if($param == 'update_qty'){
+        if($main_content = 'dashboard/manage-product'){
+            ?>
+        <script>
+            $("#total_qty").focus();
+        </script>
+    <?php
+            }
+    }
+}
+?>
+

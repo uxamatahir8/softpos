@@ -5,9 +5,19 @@ $(function () {
         var password = $('#password').val();
         let first_number = parseInt($("#first_number").text());
         let last_number = parseInt($("#second_number").text());
+        let operator = $('#operation').text();
+        let total;
         let check = 'Pass';
         let answer = parseInt($('#answer').val());
-        let total = first_number + last_number;
+        if(operator == 'plus'){
+            total = first_number +  last_number;
+        }else if(operator == 'minus'){
+            total = first_number - last_number;
+        }else if(operator == 'multiple'){
+            total = first_number * last_number;
+        }
+
+
         if (email === '') {
             show_error('Username is Required');
             check = 'Fail';
@@ -514,6 +524,33 @@ $(function () {
         if (check == 'Fail') {
             e.preventDefault();
         } else {
+            removeError();
+        }
+    });
+
+    $("body").on('click','.add_stock',function(){
+        let stock_value = $(this).data('stock');
+        let id = $(this).data('id');
+
+        $("#qty_update_link").attr('href', base+'product/edit/'+id+'/?param=update_qty');
+        $("#curr_qty").text(stock_value);
+        $("#id").val(id);
+    });
+
+    $('#add-stock').submit(function(e){
+        let add_qty = $('#add_qty').val();
+        let check;
+        if(add_qty == ''){
+            show_error('Please Add Quantity to Submit');
+            check = 'Fail';
+        }else if(isNaN(add_qty)){
+            show_error('Quantity Must Be a Number');
+            check = 'Fail';
+        }
+
+        if(check == 'Fail'){
+            e.preventDefault();
+        }else{
             removeError();
         }
     });
